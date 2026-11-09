@@ -40,29 +40,29 @@
 
 :root {
   --radius: 0.5rem;
-  --background: #0a1214;
-  --foreground: #f0f4a0;
-  --card: #0f1a1d;
-  --card-foreground: #f0f4a0;
-  --popover: #0f1a1d;
-  --popover-foreground: #f0f4a0;
-  --primary: #2596be;
-  --primary-foreground: #061014;
-  --secondary: #1a2629;
-  --secondary-foreground: #e8ed89;
-  --muted: #1a2629;
-  --muted-foreground: #d1d69e;
-  --faint: #a1a449;
-  --accent: #16262a;
-  --accent-foreground: #f0f4a0;
-  --amber: #2596be;
+  --background: #010101;
+  --foreground: #ffffff;
+  --card: #0d0d0a;
+  --card-foreground: #ffffff;
+  --popover: #0d0d0a;
+  --popover-foreground: #ffffff;
+  --primary: #e8ed89;
+  --primary-foreground: #0a0a00;
+  --secondary: #1a1a14;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a14;
+  --muted-foreground: #c9c9c0;
+  --faint: #8a8a80;
+  --accent: #1c1c15;
+  --accent-foreground: #ffffff;
+  --amber: #e8ed89;
   --destructive: oklch(0.62 0.2 28);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: rgb(240 244 160 / 0.1);
-  --hairline: rgb(240 244 160 / 0.06);
-  --input: rgb(240 244 160 / 0.14);
-  --ring: rgb(37 150 190 / 0.55);
-  --code: #060d0f;
+  --border: rgb(255 255 255 / 0.1);
+  --hairline: rgb(255 255 255 / 0.06);
+  --input: rgb(255 255 255 / 0.14);
+  --ring: rgb(232 237 137 / 0.55);
+  --code: #050505;
 }
 
 @layer base {
@@ -80,7 +80,7 @@
     -webkit-font-smoothing: antialiased;
   }
   ::selection {
-    background: rgb(37 150 190 / 0.35);
+    background: rgb(232 237 137 / 0.35);
   }
 }
 
