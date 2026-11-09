@@ -70,7 +70,7 @@ export function ArchitectureDiagram() {
   return (
     <>
       <div className="hidden md:block">
-        <Frame vb="0 0 1240 780" label="Interactive Malenia architecture: sandbox executes, engine diagnoses, store records; the optional model gateway sits outside a trust boundary">
+        <Frame vb="0 0 1240 780" label="Malenia architecture: sandbox executes, engine diagnoses, store records; the optional model gateway sits outside a trust boundary">
           {/* exploded-stack risers between layers */}
           {[0, 1].map((i) => (
             <g key={i}>

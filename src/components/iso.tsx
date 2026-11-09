@@ -142,7 +142,7 @@ export function Prism({ x, y, r, on }: { x: number; y: number; r: number; on: bo
 
 /* ---------- text, wires ---------- */
 
-export function Label({ x, y, text, on, step, font = SANS }: { x: number; y: number; text: string; on: boolean; step?: string; font?: string }) {
+export function Label({ x, y, text, on, step, font = UI }: { x: number; y: number; text: string; on: boolean; step?: string; font?: string }) {
   return (
     <text x={x} y={y} textAnchor="middle" fontFamily={font} fontSize={12} letterSpacing={0.6} fill={on ? FG : MUTED} style={{ transition: "fill .35s" }}>
       {step && <tspan fill={A} fontFamily={MONO} fontSize={10} letterSpacing={1.2}>{step}  </tspan>}

@@ -1,4 +1,4 @@
-import { A, Frame, Label, MONO, MUTED, NodeInfo, Prism, Rail, SANS, Tile, Wire, useHit, type IconName } from "./iso";
+import { A, Frame, Label, MONO, MUTED, NodeInfo, Prism, Rail, Tile, UI, Wire, useHit, type IconName } from "./iso";
 
 export { Panel } from "./iso";
 
@@ -26,7 +26,7 @@ export function FlowDiagram() {
   return (
     <>
       <div className="hidden md:block">
-        <Frame vb="0 0 1200 540" label="Interactive diagram of Malenia's diagnosis workflow">
+        <Frame vb="0 0 1200 540" label="Diagram of Malenia's diagnosis workflow">
           {ids.flatMap((a) =>
             FLOW[a].next.map((b) => {
               const p = FLOW[a], q = FLOW[b];
@@ -34,8 +34,8 @@ export function FlowDiagram() {
               return <Wire key={a + b} on={a === sel || b === sel} d={`M${p.x + 50},${p.y} C${mx},${p.y} ${mx},${q.y} ${q.x - 50},${q.y}`} />;
             }),
           )}
-          <text x={786} y={258} fontFamily={SANS} fontSize={11} fill={MUTED}>decisive</text>
-          <text x={786} y={414} fontFamily={SANS} fontSize={11} fill={MUTED}>uncertain</text>
+          <text x={786} y={258} fontFamily={UI} fontSize={11} fill={MUTED}>decisive</text>
+          <text x={786} y={414} fontFamily={UI} fontSize={11} fill={MUTED}>uncertain</text>
           {ids.map((id) => {
             const p = FLOW[id];
             const on = id === sel;
@@ -49,8 +49,8 @@ export function FlowDiagram() {
           })}
         </Frame>
       </div>
-      <Rail items={flowItems} sel={sel} onSel={setSel} />
-      <NodeInfo {...FLOW[sel]} src="diagnosis workflow" />
+      <Rail items={flowItems} sel={sel} onSel={setSel} sans />
+      <NodeInfo {...FLOW[sel]} src="diagnosis workflow" sans />
     </>
   );
 }
@@ -81,7 +81,7 @@ export function InvestigationDiagram() {
   return (
     <>
       <div className="hidden md:block">
-        <Frame vb="0 0 1200 600" label="Interactive diagram: failure episodes feed one evidence bundle, which keeps candidates, hypotheses, verified causes and unknowns separate">
+        <Frame vb="0 0 1200 600" label="Diagram: failure episodes feed one evidence bundle, which keeps candidates, hypotheses, verified causes and unknowns separate">
           {eps.map((t) => (
             <Wire key={t} on={t === sel || sel === "bundle"} d={`M${INV[t].x + 70},${INV[t].y} C360,${INV[t].y} 380,${c.y} ${c.x - 120},${c.y}`} />
           ))}
@@ -102,13 +102,13 @@ export function InvestigationDiagram() {
           {outs.map((o) => (
             <g key={o} {...hit(o, lit(o), INV[o].title)}>
               <Tile cx={INV[o].x} cy={INV[o].y} w={46} h={26} t={12} on={o === sel} icon={INV[o].icon} k={0.6} />
-              <text x={INV[o].x + 72} y={INV[o].y + 8} fontFamily={SANS} fontSize={12.5} letterSpacing={0.8} fill={o === sel ? "var(--foreground)" : MUTED} style={{ transition: "fill .35s" }}>{INV[o].label}</text>
+              <text x={INV[o].x + 72} y={INV[o].y + 8} fontFamily={UI} fontSize={12.5} letterSpacing={0.8} fill={o === sel ? "var(--foreground)" : MUTED} style={{ transition: "fill .35s" }}>{INV[o].label}</text>
             </g>
           ))}
         </Frame>
       </div>
-      <Rail items={invItems} sel={sel} onSel={setSel} />
-      <NodeInfo {...INV[sel]} src="investigation" />
+      <Rail items={invItems} sel={sel} onSel={setSel} sans />
+      <NodeInfo {...INV[sel]} src="investigation" sans />
     </>
   );
 }
