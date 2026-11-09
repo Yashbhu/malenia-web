@@ -123,7 +123,7 @@ function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
         <p className="eyebrow shrink-0 text-amber">{eyebrow}</p>
         <span className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
       </div>
-      <h2 className="font-mono head-fluid mt-5 font-normal leading-[1.15] tracking-[-0.02em] text-foreground">{title}</h2>
+      <h2 className="font-mono head-fluid mt-4 font-normal leading-[1.15] tracking-[-0.02em] text-foreground">{title}</h2>
     </Reveal>
   );
 }
@@ -148,7 +148,7 @@ function Index() {
       <section className="relative overflow-hidden border-b border-hairline">
         <HeroShader />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-        <div className="container-site relative max-w-[1080px] py-[clamp(4.5rem,11vw,8rem)]">
+        <div className="container-site relative max-w-[1080px] py-[clamp(3.5rem,9vw,7rem)]">
           <div className="max-w-[46rem]">
             <Reveal delay={80}>
               <h1 className="display hero-title hero-fluid max-w-[12ch]">
@@ -191,7 +191,7 @@ function Index() {
                   <div
                     key={`${copy}-${rep}-${label}`}
                     aria-hidden={copy + rep > 0 || undefined}
-                    className="flex shrink-0 items-center gap-2.5 border-r border-hairline px-12 py-5"
+                    className="flex shrink-0 items-center gap-2.5 border-r border-hairline px-6 py-4 sm:px-12 sm:py-5"
                   >
                     <span className="text-amber">
                       <Icon name={icon} className="h-4 w-4" />
@@ -223,7 +223,7 @@ function Index() {
 
       {/* Footer CTA */}
       <section className="relative overflow-hidden border-t border-hairline">
-        <div className="container-site relative flex flex-col gap-8 py-16 sm:flex-row sm:items-end sm:justify-between sm:py-24">
+        <div className="container-site relative flex flex-col gap-8 py-14 sm:flex-row sm:items-end sm:justify-between sm:py-20">
           <Reveal>
             <h2 className="display max-w-[16ch] text-[2.75rem] leading-[1.02] sm:text-[4.25rem]">
               Evidence over <em className="text-amber">guesswork.</em>
