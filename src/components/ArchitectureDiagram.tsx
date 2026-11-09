@@ -1,4 +1,4 @@
-import { A, DISPLAY, FG, Frame, Label, MONO, MUTED, NodeInfo, Prism, Rail, SANS, Tile, Wire, useHit, type IconName } from "./iso";
+import { A, FG, Frame, Label, MONO, MUTED, NodeInfo, Prism, Rail, Tile, UI, Wire, useHit, type IconName } from "./iso";
 
 // Malenia's own architecture as an exploded stack of trust layers:
 // 01 sandbox executes, 02 deterministic engine diagnoses, 03 store records.
@@ -54,7 +54,7 @@ function Chip({ x, y, text, on }: { x: number; y: number; text: string; on: bool
   return (
     <g style={{ transition: "opacity .35s" }} opacity={on ? 1 : 0.55}>
       <rect x={x - w / 2} y={y - 12} width={w} height={24} rx={4} fill="var(--background)" stroke={on ? A : "color-mix(in oklch, var(--foreground) 16%, transparent)"} />
-      <text x={x} y={y + 4} textAnchor="middle" fontFamily={SANS} fontSize={11} fill={on ? FG : MUTED}>{text}</text>
+      <text x={x} y={y + 4} textAnchor="middle" fontFamily={UI} fontSize={11} fill={on ? FG : MUTED}>{text}</text>
     </g>
   );
 }
@@ -84,8 +84,8 @@ export function ArchitectureDiagram() {
             <g key={l.n}>
               <g pointerEvents="none"><Tile cx={X} cy={l.y} w={W} h={H} t={TH} /></g>
               <line x1={X - W - 10} y1={l.y} x2={250} y2={l.y} stroke="color-mix(in oklch, var(--foreground) 14%, transparent)" />
-              <text x={240} y={l.y + 2} textAnchor="end" fontFamily={DISPLAY} fontSize={20} letterSpacing={1.5} fill={FG}><tspan fill={A} fontFamily={MONO} fontSize={11} letterSpacing={3}>{l.n} </tspan>{l.name}</text>
-              <text x={240} y={l.y + 20} textAnchor="end" fontFamily={SANS} fontSize={11} fill={MUTED}>{l.sub}</text>
+              <text x={240} y={l.y + 2} textAnchor="end" fontFamily={UI} fontSize={17} fontWeight={500} letterSpacing={1.2} fill={FG}><tspan fill={A} fontFamily={MONO} fontSize={11} letterSpacing={3}>{l.n} </tspan>{l.name}</text>
+              <text x={240} y={l.y + 20} textAnchor="end" fontFamily={UI} fontSize={11} fill={MUTED}>{l.sub}</text>
             </g>
           ))}
 
@@ -93,7 +93,7 @@ export function ArchitectureDiagram() {
           <Wire on={up("run", "reproduce")} d={`M150,705 C260,705 300,${LAYERS[2]!.y + 40} ${X - W + 40},${LAYERS[2]!.y + 30}`} />
           <g {...hit("run")}>
             <Tile cx={120} cy={700} w={36} h={20} t={9} on={sel === "run"} tone="danger" icon="x" k={0.6} />
-            <Label x={120} y={752} text="FAILED CI RUN" on={lit("run")} />
+            <Label x={120} y={752} text="FAILED CI RUN" on={lit("run")} font={UI} />
           </g>
 
           {/* trust boundary + model job */}
@@ -105,8 +105,8 @@ export function ArchitectureDiagram() {
           <Chip x={850} y={LAYERS[0]!.y} text="proposal · kept separate" on={up("persist", "model")} />
           <g {...hit("model")}>
             <Tile cx={1110} cy={LAYERS[1]!.y} w={56} h={32} t={12} on={sel === "model"} icon="spark" k={0.55} />
-            <Label x={1110} y={LAYERS[1]!.y + 76} text="MODEL GATEWAY · OPT-IN" on={lit("model")} />
-            <text x={1110} y={LAYERS[1]!.y + 94} textAnchor="middle" fontFamily={SANS} fontSize={10.5} fill={MUTED}>proposes, never decides</text>
+            <Label x={1110} y={LAYERS[1]!.y + 76} text="MODEL GATEWAY · OPT-IN" on={lit("model")} font={UI} />
+            <text x={1110} y={LAYERS[1]!.y + 94} textAnchor="middle" fontFamily={UI} fontSize={10.5} fill={MUTED}>proposes, never decides</text>
           </g>
 
           {/* blocks */}
@@ -125,8 +125,8 @@ export function ArchitectureDiagram() {
           {sel !== "run" && sel !== "model" && <Chip x={s.x} y={s.y - (sel === "bundle" ? 80 : 44)} text={T[sel].title} on />}
         </Frame>
       </div>
-      <Rail items={archItems} sel={sel} onSel={setSel} />
-      <NodeInfo title={T[sel].title} text={T[sel].desc} src="architecture" />
+      <Rail items={archItems} sel={sel} onSel={setSel} sans />
+      <NodeInfo title={T[sel].title} text={T[sel].desc} src="architecture" sans />
     </>
   );
 }

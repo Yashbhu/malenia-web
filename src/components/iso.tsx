@@ -9,6 +9,7 @@ export const MUTED = "var(--muted-foreground)";
 export const MONO = "JetBrains Mono, monospace";
 export const SANS = "var(--font-sans)";
 export const DISPLAY = "var(--font-display)";
+export const UI = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 const EDGE = "color-mix(in oklch, var(--foreground) 38%, transparent)";
 const BACK = "color-mix(in oklch, var(--foreground) 13%, transparent)";
 export const DIM = 0.42;
@@ -141,9 +142,9 @@ export function Prism({ x, y, r, on }: { x: number; y: number; r: number; on: bo
 
 /* ---------- text, wires ---------- */
 
-export function Label({ x, y, text, on, step }: { x: number; y: number; text: string; on: boolean; step?: string }) {
+export function Label({ x, y, text, on, step, font = SANS }: { x: number; y: number; text: string; on: boolean; step?: string; font?: string }) {
   return (
-    <text x={x} y={y} textAnchor="middle" fontFamily={SANS} fontSize={12} letterSpacing={0.6} fill={on ? FG : MUTED} style={{ transition: "fill .35s" }}>
+    <text x={x} y={y} textAnchor="middle" fontFamily={font} fontSize={12} letterSpacing={0.6} fill={on ? FG : MUTED} style={{ transition: "fill .35s" }}>
       {step && <tspan fill={A} fontFamily={MONO} fontSize={10} letterSpacing={1.2}>{step}  </tspan>}
       {text}
     </text>
@@ -206,12 +207,12 @@ export function InfoCard({ step, title, text, points = [], src }: { step?: strin
 }
 
 /* Responsive detail card: always visible below a diagram, driven by the current selection. */
-export function NodeInfo({ step, title, text, points = [], src }: { step?: string; title: string; text: string; points?: string[]; src: string }) {
+export function NodeInfo({ step, title, text, points = [], src, sans = false }: { step?: string; title: string; text: string; points?: string[]; src: string; sans?: boolean }) {
   return (
     <div key={title} className="callout-swap callout-card mt-5">
       <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
         {step && <span className="callout-step">{step}</span>}
-        <span className="display text-[1.4rem] sm:text-[1.55rem]">{title}</span>
+        <span className={sans ? "text-[1.2rem] font-medium sm:text-[1.3rem]" : "display text-[1.4rem] sm:text-[1.55rem]"}>{title}</span>
         <span className="eyebrow ml-auto text-[0.6rem]">{src}</span>
       </div>
       <p className="text-[0.88rem] leading-relaxed text-foreground/80">{text}</p>
@@ -250,7 +251,7 @@ export function Panel({ name, children }: { name: string; children: ReactNode })
   );
 }
 
-export function Rail<T extends string>({ items, sel, onSel }: { items: { id: T; step: string; label: string }[]; sel: T; onSel: (id: T) => void }) {
+export function Rail<T extends string>({ items, sel, onSel, sans = false }: { items: { id: T; step: string; label: string }[]; sel: T; onSel: (id: T) => void; sans?: boolean }) {
   return (
     <div className="mt-[clamp(0.75rem,2vw,1.5rem)] flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:justify-center">
       {items.map((it) => {
@@ -262,6 +263,7 @@ export function Rail<T extends string>({ items, sel, onSel }: { items: { id: T; 
             onClick={() => onSel(it.id)}
             onMouseEnter={() => onSel(it.id)}
             aria-pressed={on}
+            style={sans ? { fontFamily: UI } : undefined}
             className={`rail-chip ${on ? "rail-chip-on" : ""}`}
           >
             <span className="text-amber">{it.step}</span>
