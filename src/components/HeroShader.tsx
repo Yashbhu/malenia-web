@@ -19,7 +19,7 @@ void main(){
   float x=uv.x;
   float px=1.0/r.y;
   float ex=2.0/r.x;
-  vec3 bg=vec3(0.045,0.040,0.070)+vec3(0.03,0.025,0.06)*(1.0-length(uv-vec2(0.7,0.55)));
+  vec3 bg=vec3(0.039,0.071,0.078)+vec3(0.02,0.035,0.04)*(1.0-length(uv-vec2(0.7,0.55)));
   vec3 col=vec3(0.0);
   float phc=0.0;
   for(int i=0;i<34;i++){
@@ -32,16 +32,16 @@ void main(){
     float lw=1.0+2.0*abs(s);
     float lum=1.0-smoothstep(0.3*px*lw,1.5*px*lw,d);
     float face=abs(cos(ph));
-    vec3 lc=mix(vec3(0.52,0.45,1.0),vec3(0.95,0.93,1.0),pow(face,3.0)*(1.0-0.5*abs(s)));
+    vec3 lc=mix(vec3(0.145,0.588,0.745),vec3(0.941,0.957,0.627),pow(face,3.0)*(1.0-0.5*abs(s)));
     col=max(col,lc*lum*(0.30+0.22*pow(face,4.0))*(0.10+3.2*pow(abs(s),0.7)));
     phc=ph;
   }
   float dummy;float sp=ribbonY(x,0.0,t,dummy);
   float glow=pow(abs(cos(phc)),10.0)*exp(-pow((uv.y-sp)*8.0,2.0));
   float dm=abs(uv.y-sp);
-  col=max(col,vec3(0.62,0.56,1.0)*glow*0.12);
-  col=max(col,vec3(0.95,0.93,1.0)*(1.0-smoothstep(0.4*px,1.6*px,dm))*0.50);
-  col+=vec3(0.6,0.55,1.0)*exp(-dm*r.y*0.25)*0.09;
+  col=max(col,vec3(0.30,0.70,0.85)*glow*0.12);
+  col=max(col,vec3(0.941,0.957,0.627)*(1.0-smoothstep(0.4*px,1.6*px,dm))*0.50);
+  col+=vec3(0.145,0.588,0.745)*exp(-dm*r.y*0.25)*0.09;
   col=1.0-exp(-col*1.5);
   col*=smoothstep(0.14,0.42,x);
   col=bg+col;

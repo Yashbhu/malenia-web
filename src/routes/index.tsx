@@ -223,8 +223,6 @@ function Index() {
 
       {/* Footer CTA */}
       <section className="relative overflow-hidden border-t border-hairline">
-        <HeroShader reverse />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" />
         <div className="container-site relative flex flex-col gap-8 py-16 sm:flex-row sm:items-end sm:justify-between sm:py-24">
           <Reveal>
             <h2 className="display max-w-[16ch] text-[2.75rem] leading-[1.02] sm:text-[4.25rem]">
