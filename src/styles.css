@@ -1,0 +1,283 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-hairline: var(--hairline);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-amber: var(--amber);
+  --color-faint: var(--faint);
+  --color-code: var(--code);
+
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.14 0.02 290);
+  --foreground: oklch(0.93 0.018 85);
+  --card: oklch(0.17 0.005 85);
+  --card-foreground: oklch(0.93 0.018 85);
+  --popover: oklch(0.17 0.005 85);
+  --popover-foreground: oklch(0.93 0.018 85);
+  --primary: oklch(0.93 0.018 85);
+  --primary-foreground: oklch(0.145 0.004 85);
+  --secondary: oklch(0.19 0.005 85);
+  --secondary-foreground: oklch(0.93 0.018 85);
+  --muted: oklch(0.19 0.005 85);
+  --muted-foreground: oklch(0.68 0.014 85);
+  --faint: oklch(0.5 0.01 85);
+  --accent: oklch(0.2 0.006 85);
+  --accent-foreground: oklch(0.93 0.018 85);
+  --amber: oklch(0.76 0.13 290);
+  --destructive: oklch(0.62 0.2 28);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.93 0.018 85 / 0.09);
+  --hairline: oklch(0.93 0.018 85 / 0.06);
+  --input: oklch(0.93 0.018 85 / 0.12);
+  --ring: oklch(0.76 0.13 290 / 0.5);
+  --code: oklch(0.12 0.004 85);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: oklch(0.76 0.13 290 / 0.3);
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility link-quiet {
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+  &:hover {
+    color: var(--foreground);
+  }
+}
+
+@utility prose-docs {
+  & h2 {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    color: var(--foreground);
+  }
+  & h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 1.75rem 0 0.5rem;
+    color: var(--foreground);
+  }
+  & p,
+  & li {
+    color: var(--muted-foreground);
+    line-height: 1.75;
+    font-size: 0.9375rem;
+  }
+  & p + p {
+    margin-top: 0.875rem;
+  }
+  & ul {
+    margin-top: 0.75rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  & ul li {
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  & ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.4rem;
+    height: 1px;
+    background: var(--amber);
+  }
+  & :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    padding: 0.1em 0.35em;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--foreground);
+    background: var(--code);
+  }
+  & strong {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.reveal[data-armed] {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+}
+.reveal[data-armed][data-visible="true"] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition:
+    opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@keyframes marquee-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee { mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { animation: marquee-x 40s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* Bold motion layer */
+.hero-title { font-weight: 400; letter-spacing: -0.04em; }
+.hero-title .word { display: inline-block; opacity: 0; transform: translateY(0.35em) rotate(2deg); filter: blur(10px); animation: word-in 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+@keyframes word-in { to { opacity: 1; transform: none; filter: none; } }
+.text-shimmer { background: linear-gradient(100deg, var(--amber) 30%, var(--foreground) 50%, var(--amber) 70%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: word-in 1.1s cubic-bezier(0.2,0.8,0.2,1) forwards, shimmer 6s 1.4s ease-in-out infinite; padding-right: 0.08em; }
+@keyframes shimmer { 0%,100% { background-position: 100% 0; } 50% { background-position: 0% 0; } }
+
+.btn-glow { position: relative; overflow: hidden; box-shadow: 0 0 0 1px color-mix(in oklch, var(--amber) 60%, transparent), 0 10px 40px -10px color-mix(in oklch, var(--amber) 70%, transparent); transition: transform .25s ease, box-shadow .25s ease; }
+.btn-glow:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px var(--amber), 0 16px 50px -8px color-mix(in oklch, var(--amber) 90%, transparent); }
+.btn-glow::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, color-mix(in oklch, var(--foreground) 45%, transparent) 50%, transparent 65%); transform: translateX(-120%); animation: sweep 4s 2s ease-in-out infinite; }
+@keyframes sweep { 0%, 60% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+
+.sec-num { font-family: var(--font-display); font-size: 2.75rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--amber); margin-top: -0.25rem; }
+
+.rule-draw { position: relative; }
+.rule-draw::before { content: ""; position: absolute; left: 0; top: 0; height: 1px; width: 100%; background: linear-gradient(90deg, var(--amber), var(--border) 40%); transform-origin: left; transform: scaleX(0); transition: transform 1.4s cubic-bezier(0.2,0.8,0.2,1); }
+[data-visible="true"] .rule-draw::before, [data-visible="true"].rule-draw::before, .rule-draw:has([data-visible="true"])::before { transform: scaleX(1); }
+
+.arch-flow { animation: flow-dash 1.6s linear infinite; }
+@keyframes flow-dash { to { stroke-dashoffset: -14; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title .word, .text-shimmer { animation: none; opacity: 1; transform: none; filter: none; }
+  .btn-glow::after, .arch-flow { animation: none; }
+  .rule-draw::before { transform: none; transition: none; }
+}
+
+/* Diagram motion system
+   1. Scroll: sections fade up once (reveal).
+   2. Ambient: only the dotted wires flow, slowly.
+   3. Focus: hovering a block never moves geometry (no hit-area jitter) — it only
+      changes light: siblings dim, the focused block glows, the callout cross-fades. */
+:root { --ease-out: cubic-bezier(0.22, 1, 0.36, 1); }
+svg [role="button"] { transition: opacity .4s var(--ease-out), filter .4s var(--ease-out); pointer-events: bounding-box; }
+svg [role="button"][data-sel="true"] { filter: drop-shadow(0 0 14px color-mix(in oklch, var(--amber) 40%, transparent)); }
+svg [role="button"]:focus-visible { filter: drop-shadow(0 0 0 var(--amber)) drop-shadow(0 0 10px var(--amber)); }
+.callout-swap { animation: callout-in .45s var(--ease-out) both; }
+@keyframes callout-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.callout-lead { animation: lead-in .45s var(--ease-out) both; }
+@keyframes lead-in { from { opacity: 0; } to { opacity: 1; } }
+.reveal[data-armed] { transform: translateY(20px); filter: none; }
+.reveal[data-armed][data-visible="true"] { transform: none; transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.diagram-panel { position: relative; border: 1px solid var(--border); border-radius: 14px; background: linear-gradient(180deg, color-mix(in oklch, var(--foreground) 3%, transparent), transparent 60%); box-shadow: inset 0 1px 0 color-mix(in oklch, var(--foreground) 6%, transparent); overflow: hidden; }
+.diagram-panel::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(120deg, color-mix(in oklch, var(--amber) 50%, transparent), transparent 35%, transparent 70%, color-mix(in oklch, var(--amber) 25%, transparent)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .callout-swap, .callout-lead { animation: none; } svg [role="button"] { transition: none; } }
+
+/* Diagram cards & controls */
+.callout-card { height: 100%; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; padding: 14px 18px; border-radius: 12px; background: color-mix(in oklch, var(--card) 88%, transparent); border: 1px solid color-mix(in oklch, var(--foreground) 12%, transparent); box-shadow: inset 0 1px 0 color-mix(in oklch, var(--amber) 55%, transparent), 0 20px 50px -20px color-mix(in oklch, var(--code) 90%, transparent); }
+.callout-step { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--amber); background: color-mix(in oklch, var(--amber) 14%, transparent); border: 1px solid color-mix(in oklch, var(--amber) 35%, transparent); border-radius: 999px; padding: 2px 8px; }
+.callout-chip { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted-foreground); background: color-mix(in oklch, var(--foreground) 5%, transparent); border-radius: 999px; padding: 3px 9px; }
+.rail-chip { display: inline-flex; flex-shrink: 0; align-items: center; gap: 0.5rem; border-radius: 999px; border: 1px solid var(--hairline); padding: 0.4rem 0.8rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.02em; color: var(--muted-foreground); transition: color .3s var(--ease-out), border-color .3s var(--ease-out), background-color .3s var(--ease-out); }
+.rail-chip:hover { color: var(--foreground); border-color: var(--border); }
+.rail-chip-on { color: var(--foreground); border-color: color-mix(in oklch, var(--amber) 55%, transparent); background: color-mix(in oklch, var(--amber) 12%, transparent); }
+
+/* Fluid rhythm: one spacing scale shared by every section */
+.section-fluid { padding-block: clamp(4rem, 10vw, 9rem); }
+.section-fluid + .section-fluid { padding-top: 0; }
+.head-fluid { font-size: clamp(1.5rem, 3.4vw, 2.6rem); }
+.gap-fluid { margin-top: clamp(1.75rem, 4vw, 3.5rem); }
+.hero-fluid { font-size: clamp(3.25rem, 11vw, 8.25rem); }
+.container-wide { width: 100%; max-width: 1240px; margin-inline: auto; padding-inline: clamp(0.75rem, 3vw, 1.5rem); }
