@@ -65,7 +65,7 @@ function Docs() {
   return (
     <div className="min-h-screen bg-background">
       <SiteNav />
-      <div className="mx-auto flex w-full max-w-[1180px] px-6">
+      <div className="container-wide flex w-full">
         <aside className="sticky top-14 hidden h-[calc(100vh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r border-hairline py-12 pr-6 md:block">
           <p className="eyebrow mb-5">Documentation</p>
           <nav className="flex flex-col border-l border-hairline">

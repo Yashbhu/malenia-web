@@ -148,7 +148,7 @@ function Index() {
       <section className="relative overflow-hidden border-b border-hairline">
         <HeroShader />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
-        <div className="container-site relative max-w-[1080px] py-[clamp(3.5rem,9vw,7rem)]">
+        <div className="container-site relative py-[clamp(3.5rem,9vw,7rem)]">
           <div className="max-w-[46rem]">
             <Reveal delay={80}>
               <h1 className="display hero-title hero-fluid max-w-[12ch]">

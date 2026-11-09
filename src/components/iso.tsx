@@ -7,6 +7,8 @@ export const A = "var(--amber)";
 export const FG = "var(--foreground)";
 export const MUTED = "var(--muted-foreground)";
 export const MONO = "JetBrains Mono, monospace";
+export const SANS = "var(--font-sans)";
+export const DISPLAY = "var(--font-display)";
 const EDGE = "color-mix(in oklch, var(--foreground) 38%, transparent)";
 const BACK = "color-mix(in oklch, var(--foreground) 13%, transparent)";
 export const DIM = 0.42;
@@ -141,8 +143,8 @@ export function Prism({ x, y, r, on }: { x: number; y: number; r: number; on: bo
 
 export function Label({ x, y, text, on, step }: { x: number; y: number; text: string; on: boolean; step?: string }) {
   return (
-    <text x={x} y={y} textAnchor="middle" fontFamily={MONO} fontSize={11} letterSpacing={1.4} fill={on ? FG : MUTED} style={{ transition: "fill .35s" }}>
-      {step && <tspan fill={A}>{step}  </tspan>}
+    <text x={x} y={y} textAnchor="middle" fontFamily={SANS} fontSize={12} letterSpacing={0.6} fill={on ? FG : MUTED} style={{ transition: "fill .35s" }}>
+      {step && <tspan fill={A} fontFamily={MONO} fontSize={10} letterSpacing={1.2}>{step}  </tspan>}
       {text}
     </text>
   );
@@ -169,7 +171,7 @@ export function Callout({ x, y, w, h = 140, step, title, text, points = [], src,
         <div key={title} className="callout-swap callout-card">
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {step && <span className="callout-step">{step}</span>}
-            <span style={{ fontFamily: "var(--font-display)", fontSize: 22, lineHeight: 1, color: "var(--foreground)", letterSpacing: "-0.01em" }}>{title}</span>
+            <span style={{ fontFamily: DISPLAY, fontSize: 22, lineHeight: 1, color: "var(--foreground)", letterSpacing: "-0.01em" }}>{title}</span>
             <span style={{ marginLeft: "auto", fontFamily: MONO, fontSize: 9.5, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--faint)", whiteSpace: "nowrap" }}>{src}</span>
           </div>
           <div style={{ color: "color-mix(in oklch, var(--foreground) 78%, transparent)", fontSize: 13, lineHeight: 1.5 }}>{text}</div>
@@ -199,6 +201,25 @@ export function InfoCard({ step, title, text, points = [], src }: { step?: strin
         </div>
       )}
       <span className="eyebrow text-[0.6rem]">{src}</span>
+    </div>
+  );
+}
+
+/* Responsive detail card: always visible below a diagram, driven by the current selection. */
+export function NodeInfo({ step, title, text, points = [], src }: { step?: string; title: string; text: string; points?: string[]; src: string }) {
+  return (
+    <div key={title} className="callout-swap callout-card mt-5">
+      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+        {step && <span className="callout-step">{step}</span>}
+        <span className="display text-[1.4rem] sm:text-[1.55rem]">{title}</span>
+        <span className="eyebrow ml-auto text-[0.6rem]">{src}</span>
+      </div>
+      <p className="text-[0.88rem] leading-relaxed text-foreground/80">{text}</p>
+      {points.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {points.map((pt) => <span key={pt} className="callout-chip">{pt}</span>)}
+        </div>
+      )}
     </div>
   );
 }
